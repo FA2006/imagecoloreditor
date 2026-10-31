@@ -1,6 +1,9 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Wand2, Edit2, Check as CheckIcon, Plus, X, Undo2, Redo2, RotateCcw } from 'lucide-react';
+import Footer from './Footer';
+import Navbar from './Navbar';
+
 
 interface ColorChange {
   id: string;
@@ -38,6 +41,7 @@ const extractProminentColors = async (imgSrc: string, maxColors = 8): Promise<st
       
       for (let i = 0; i < data.length; i += 4) {
         if (data[i + 3] < 128) continue;
+        // Bucket nearby RGB values together so small image variations don't dominate the palette.
         const r = Math.round(data[i] / 32) * 32;
         const g = Math.round(data[i + 1] / 32) * 32;
         const b = Math.round(data[i + 2] / 32) * 32;
@@ -116,6 +120,7 @@ const App: React.FC = () => {
   const commitState = useCallback((newStateStr?: any) => {
     const currentState = { changes, targetColor, fillColor, tolerance, ...newStateStr };
     setHistory(prev => {
+      // A new edit after undo starts a new history branch, discarding the old redo states.
       const newHistory = prev.slice(0, historyIndex + 1);
       
       // Avoid pushing duplicate states
@@ -252,6 +257,7 @@ const App: React.FC = () => {
                 let currentG = data[i + 1];
                 let currentB = data[i + 2];
 
+                // Apply edits in order; each later edit sees the color produced by earlier edits.
                 for (const change of activeChanges) {
                   let shouldReplace = change.isAll;
                   
@@ -302,24 +308,31 @@ const App: React.FC = () => {
   
   const triggerFileSelect = () => fileInputRef.current?.click();
 
+
   return (
-    <div className="min-h-screen bg-slate-900 font-sans p-4 sm:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="flex min-h-screen flex-col bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200 font-sans">
+      <Navbar />
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col p-4 sm:p-6 lg:p-8">
+
+        
         <header className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3">
-                <ColorWandIcon className="w-10 h-10 text-indigo-400" />
-                <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-                    Image Color Filler
-                </h1>
-            </div>
-            <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
-                Instantly fill the contents of any image with a solid color. Works best with transparent PNGs.
-            </p>
+          <div className="flex items-center justify-center gap-3">
+            <ColorWandIcon className="w-10 h-10 text-indigo-500 dark:text-indigo-400" />
+
+            <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-400 dark:to-cyan-400 py-2">
+              Image Color Filler
+            </h1>
+          </div>
+
+          <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            Instantly fill the contents of any image with a solid color. Works best with transparent PNGs.
+          </p>
         </header>
+
 
         <main className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Controls Panel */}
-          <div className="lg:col-span-2 bg-slate-800/50 p-6 rounded-2xl border border-slate-700 shadow-lg flex flex-col gap-6 h-fit">
+          <div className="lg:col-span-2 bg-slate-900 p-6 rounded-2xl border border-slate-700 shadow-lg flex flex-col gap-6 h-fit">
             <h2 className="text-2xl font-semibold text-white border-b border-slate-600 pb-3">Controls</h2>
             
             {/* Step 1: Upload */}
@@ -519,6 +532,7 @@ const App: React.FC = () => {
           </div>
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
@@ -533,21 +547,25 @@ interface ImagePanelProps {
 const ImagePanel: React.FC<ImagePanelProps> = ({ title, imageUrl, isLoading = false, children }) => {
     return (
         <div className="flex flex-col gap-3">
-            <h3 className="text-xl font-semibold text-slate-300 text-center">{title}</h3>
+            <h3 className="text-xl font-semibold text-center text-slate-700 dark:text-slate-300">{title}</h3>
             <div className="relative aspect-square w-full bg-slate-800/50 rounded-2xl border-2 border-dashed border-slate-700 flex items-center justify-center p-4 overflow-hidden shadow-inner bg-[radial-gradient(#475569_1px,transparent_1px)] [background-size:16px_16px]">
                 {isLoading && (
+                    
                     <div className="absolute inset-0 bg-slate-900/80 flex flex-col items-center justify-center z-10">
+                        
                         <svg className="animate-spin h-10 w-10 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        <p className="mt-4 text-slate-300">Generating...</p>
+                        
+                        <p className="mt-4 text-slate-700 dark:text-slate-300">Generating...</p>
+                    
                     </div>
                 )}
                 {imageUrl ? (
                     <img src={imageUrl} alt={title} className="max-w-full max-h-full object-contain" />
                 ) : (
-                    !isLoading && <span className="text-slate-500">Preview</span>
+                    !isLoading && <span className="text-slate-600 dark:text-slate-400">Preview</span>
                 )}
                 {children}
             </div>
