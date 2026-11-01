@@ -6,9 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import BlogPage from './BlogPage';
 import BlogPostPage from './BlogPostPage';
-import ColorPalettes from './Colorpalettes';
 
-import './theme.css';
 
 const rootElement = document.getElementById('root');
 
@@ -26,8 +24,6 @@ ReactDOM.createRoot(rootElement).render(
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
 
-        {/* Color palettes */}
-        <Route path="/color-palettes" element={<ColorPalettes />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

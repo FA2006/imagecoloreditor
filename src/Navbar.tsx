@@ -57,7 +57,7 @@ const Navbar = () => {
             </span>
 
             <h2 className="text-sm font-bold tracking-wider text-slate-800 sm:text-base dark:text-slate-300">
-              Image Color Filler
+              Image Color Fillter
             </h2>
           </Link>
 

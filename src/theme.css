@@ -16,42 +16,4 @@ html:not(.dark) body {
 }
 
 
-/* ========================================
-   COLOR PALETTE HERO ANIMATIONS
-======================================== */
 
-@keyframes palette-up {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes palette-down {
-  from {
-    transform: translateY(-50%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-.animate-palette-up {
-  animation: palette-up 24s linear infinite;
-}
-
-.animate-palette-down {
-  animation: palette-down 28s linear infinite;
-}
-
-/* Respect users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .animate-palette-up,
-  .animate-palette-down {
-    animation: none;
-  }
-}
