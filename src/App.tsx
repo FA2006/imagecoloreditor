@@ -1,6 +1,7 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Wand2, Edit2, Check as CheckIcon, Plus, X, Undo2, Redo2, RotateCcw } from 'lucide-react';
+import gsap from 'gsap';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
@@ -19,6 +20,7 @@ const rgbToHex = (r: number, g: number, b: number) => {
     return hex.length === 1 ? '0' + hex : hex;
   }).join('');
 };
+
 
 const extractProminentColors = async (imgSrc: string, maxColors = 8): Promise<string[]> => {
   return new Promise((resolve) => {
@@ -93,6 +95,7 @@ const DownloadIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 
 const App: React.FC = () => {
+  const headerRef = useRef<HTMLElement>(null);
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [resultImage, setResultImage] = useState<string | null>(null);
   
@@ -108,6 +111,23 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from('.hero-content > *', {
+        y: 35,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out',
+      });
+    }, header);
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     if (originalImage) {
@@ -315,19 +335,21 @@ const App: React.FC = () => {
       <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col p-4 sm:p-6 lg:p-8">
 
         
-        <header className="text-center mb-8">
+      <header ref={headerRef} className="mb-8 text-center">
+        <div className="hero-content">
           <div className="flex items-center justify-center gap-3">
-            <ColorWandIcon className="w-10 h-10 text-indigo-500 dark:text-indigo-400" />
+            <ColorWandIcon className="h-10 w-10 text-indigo-500 dark:text-indigo-400" />
 
-            <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-400 dark:to-cyan-400 py-2">
+            <h1 className="bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text py-2 text-4xl font-bold text-transparent dark:from-indigo-400 dark:to-cyan-400 sm:text-5xl">
               Image Color Filler
             </h1>
           </div>
 
-          <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
             Instantly fill the contents of any image with a solid color. Works best with transparent PNGs.
           </p>
-        </header>
+        </div>
+      </header>
 
 
         <main className="grid grid-cols-1 lg:grid-cols-5 gap-8">

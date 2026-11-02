@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, Wand2, X } from 'lucide-react';
 
 const Navbar = () => {
@@ -14,32 +14,43 @@ const Navbar = () => {
         : 'text-slate-600 hover:bg-slate-100 hover:text-indigo-700 dark:text-indigo-200 dark:hover:bg-slate-500/30 dark:hover:text-white'
     }`;
 
+    //remove the announcement bar and donate link if you are already in the page
+    const location = useLocation();
+
+    const isDonatePage = location.pathname === '/donate';
+
+
   return (
     <>
       {/* Announcement bar */}
-      <aside
-        aria-label="Announcement"
-        className="fixed inset-x-0 top-0 z-[60] flex h-9 items-center justify-center border-b border-indigo-200 bg-indigo-50 px-4 text-center text-xs text-indigo-900 backdrop-blur-md dark:border-indigo-300/10 dark:bg-indigo-950/95 dark:text-indigo-100 sm:text-sm"
-      >
-        <span className="mr-2 text-indigo-700/80 dark:text-indigo-200/80">
-          Support the project
-        </span>
-
-        <Link
-          to="/#"
-          className="font-semibold text-indigo-800/90 underline decoration-indigo-400 underline-offset-4 transition-colors hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:text-indigo-100/80 dark:decoration-indigo-300/70 dark:hover:text-indigo-200 dark:focus-visible:ring-indigo-300"
+      {!isDonatePage && (
+        <aside
+          aria-label="Announcement"
+          className="fixed inset-x-0 top-0 z-[60] flex h-9 items-center justify-center border-b border-indigo-200 bg-indigo-50 px-4 text-center text-xs text-indigo-900 backdrop-blur-md dark:border-indigo-300/10 dark:bg-indigo-950/95 dark:text-indigo-100 sm:text-sm"
         >
-          Donate
-        </Link>
-      </aside>
+          <span className="mr-2 text-indigo-700/80 dark:text-indigo-200/80">
+            Support the project
+          </span>
 
-      <div className="h-9" aria-hidden="true" />
+          <Link
+            to="/donate"
+            className="font-semibold text-indigo-800/90 underline decoration-indigo-400 underline-offset-4 transition-colors hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:text-indigo-100/80 dark:decoration-indigo-300/70 dark:hover:text-indigo-200 dark:focus-visible:ring-indigo-300"
+          >
+            Donate
+          </Link>
+        </aside>
+      )}
+
+      {!isDonatePage && (
+        <div className="h-9" aria-hidden="true" />
+      )}
 
       {/* Main navigation */}
-      
       <nav
         aria-label="Main navigation"
-        className="sticky top-9 z-50 mb-8 w-full rounded-bl-lg rounded-br-lg border-b border-slate-200 bg-white/95 px-5 py-4 shadow-xl shadow-slate-900/5 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/95 dark:shadow-black/20"
+        className={`sticky ${
+          isDonatePage ? 'top-0' : 'top-9'
+        } z-50 mb-8 w-full rounded-bl-lg rounded-br-lg border-b border-slate-200 bg-white/95 px-5 py-4 shadow-xl shadow-slate-900/5 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/95 dark:shadow-black/20`}
       >
         <div className="flex items-center justify-between">
 
@@ -57,7 +68,7 @@ const Navbar = () => {
             </span>
 
             <h2 className="text-sm font-bold tracking-wider text-slate-800 sm:text-base dark:text-slate-300">
-              Image Color Fillter
+              Image Color Filler
             </h2>
           </Link>
 

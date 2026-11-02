@@ -1,4 +1,3 @@
-
 import { socialLinks } from './Config/socialLinks';
 import { NavLink } from 'react-router-dom';
 import { WandSparkles, Wand2 } from 'lucide-react';
@@ -11,6 +10,7 @@ const footerSections = [
       { label: 'Image Editor', to: '/' },
       { label: 'Blog', to: '/blog' },
       { label: 'About', to: '/about' },
+      { label: 'Donate', to: '/donate' },
     ],
   },
   {
@@ -48,10 +48,10 @@ const Footer = () => (
     >
 
       {/* Brand and social links */}
-      <div className="col-start-1 row-start-1 flex flex-col items-start px-5 gap-4">
+      <div className="col-start-1 row-start-1 flex flex-col items-start px-3 gap-4">
 
         {/* Brand name */}
-        <p className="text-lg font-semibold tracking-tight text-slate-800 dark:text-slate-200">
+        <p className="text-lg font-semibold tracking-tight text-slate-800 dark:text-slate-200 px-2">
           Image Color Filler
         </p>
 
@@ -84,14 +84,14 @@ const Footer = () => (
         </div>
 
         {/* Theme toggle */}
-        <div className="flex items-center px-10">
+        <div className="flex items-center px-12">
           <ThemeToggle />
         </div>
 
       </div>
       
 
-      <div className="col-span-2 row-start-2 flex justify-center gap-8 sm:gap-12 lg:col-span-1 lg:col-start-2 lg:row-start-1">
+      <div className="col-span-2 row-start-2 flex justify-center gap-14 sm:gap-12 lg:col-span-1 lg:col-start-2 lg:row-start-1">
         {footerSections.map((section) => (
           <div
             key={section.title}
