@@ -1,7 +1,7 @@
-
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, Wand2, X } from 'lucide-react';
+import Donate from './Donate';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,12 +32,9 @@ const Navbar = () => {
             Support the project
           </span>
 
-          <Link
-            to="/donate"
-            className="font-semibold text-indigo-800/90 underline decoration-indigo-400 underline-offset-4 transition-colors hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:text-indigo-100/80 dark:decoration-indigo-300/70 dark:hover:text-indigo-200 dark:focus-visible:ring-indigo-300"
-          >
+          <Donate className="font-semibold text-indigo-800/90 underline decoration-indigo-400 underline-offset-4 transition-colors hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:text-indigo-100/80 dark:decoration-indigo-300/70 dark:hover:text-indigo-200 dark:focus-visible:ring-indigo-300">
             Donate
-          </Link>
+          </Donate>
         </aside>
       )}
 
@@ -50,7 +47,7 @@ const Navbar = () => {
         aria-label="Main navigation"
         className={`sticky ${
           isDonatePage ? 'top-0' : 'top-9'
-        } z-50 mb-8 w-full rounded-bl-lg rounded-br-lg border-b border-slate-200 bg-white/95 px-5 py-4 shadow-xl shadow-slate-900/5 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/95 dark:shadow-black/20`}
+        } z-50 mb-8 w-full rounded-bl-lg rounded-br-lg border-b border-slate-200 bg-white/95 px-5 py-4 shadow-xl shadow-slate-900/7 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/95 dark:shadow-black/20`}
       >
         <div className="flex items-center justify-between">
 

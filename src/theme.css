@@ -15,5 +15,24 @@ html:not(.dark) body {
   color: #0f172a;
 }
 
+/* Hide scrollbar while keeping scrolling functional */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
+/* Remove number input spinner buttons */
+.no-number-arrows::-webkit-inner-spin-button,
+.no-number-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-number-arrows {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}

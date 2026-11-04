@@ -2,6 +2,7 @@ import { socialLinks } from './Config/socialLinks';
 import { NavLink } from 'react-router-dom';
 import { WandSparkles, Wand2 } from 'lucide-react';
 import ThemeToggle from './components/ThemeToggle';
+import Donate from './Donate';
 
 const footerSections = [
   {
@@ -26,7 +27,7 @@ const footerSections = [
 ];
 
 const Footer = () => (
-  <footer className="mt-auto pt-16 text-slate-900 dark:text-slate-200">
+  <footer className="mt-auto pt- text-slate-900 dark:text-slate-200">
 
     {/* Decorative divider */}
     <div className="flex w-full items-center gap-4">
@@ -90,7 +91,7 @@ const Footer = () => (
 
       </div>
       
-
+      {/* links */}
       <div className="col-span-2 row-start-2 flex justify-center gap-14 sm:gap-12 lg:col-span-1 lg:col-start-2 lg:row-start-1">
         {footerSections.map((section) => (
           <div
@@ -104,19 +105,25 @@ const Footer = () => (
             <ul className="flex flex-col items-start gap-3">
               {section.links.map((link) => (
                 <li key={link.label}>
-                  <NavLink
-                    to={link.to}
-                    end={link.to === '/'}
-                    className={({ isActive }) =>
-                      `text-sm transition-colors hover:text-indigo-600 dark:hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
-                        isActive
-                          ? 'text-indigo-600 dark:text-indigo-300'
-                          : 'text-slate-600 dark:text-slate-400'
-                      }`
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
+                  {link.to === '/donate' ? (
+                    <Donate className="text-sm text-slate-600 transition-colors hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 dark:text-slate-400 dark:hover:text-indigo-300">
+                      {link.label}
+                    </Donate>
+                  ) : (
+                    <NavLink
+                      to={link.to}
+                      end={link.to === '/'}
+                      className={({ isActive }) =>
+                        `text-sm transition-colors hover:text-indigo-600 dark:hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
+                          isActive
+                            ? 'text-indigo-600 dark:text-indigo-300'
+                            : 'text-slate-600 dark:text-slate-400'
+                        }`
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  )}
                 </li>
               ))}
             </ul>

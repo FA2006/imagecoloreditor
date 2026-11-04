@@ -332,7 +332,7 @@ const App: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-col bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200 font-sans">
       <Navbar />
-      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col p-4 sm:p-6 lg:p-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col p-4 lg:pb-20 pb-16 sm:p-6 lg:p-8">
 
         
       <header ref={headerRef} className="mb-8 text-center">

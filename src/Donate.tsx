@@ -1,20 +1,41 @@
-import Navbar from './Navbar';
-import Footer from './Footer';
 
-const DonatePage = () => {
-  return (
-    <div className="flex min-h-screen flex-col bg-white font-sans text-slate-900 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
-      <Navbar />
-      <div className="flex flex-col items-center justify-center gap-4 px-4 py-8 text-center">
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-200">Support Our Work</h1>
-        <p className="text-slate-600 dark:text-slate-400">
-          Help us continue to improve Image Color Filler by making a donation.
-        </p>
-      </div>
-      <Footer />
-    </div>
-  );
+import { useState, type ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Modal from './components/donate/Modal';
+import DonationForm from './components/donate/DonationForm';
+
+type DonateProps = {
+  children: ReactNode;
+  className?: string;
 };
 
-export default DonatePage;
+export default function Donate({ children, className }: DonateProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
+  const handleDonate = () => {
+    const isLargeScreen = window.matchMedia('(min-width: 1024px)').matches;
+
+    if (isLargeScreen) {
+      setIsOpen(true);
+    } else {
+      navigate('/donate');
+    }
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={handleDonate}
+        className={className}
+      >
+        {children}
+      </button>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <DonationForm />
+      </Modal>
+    </>
+  );
+}
