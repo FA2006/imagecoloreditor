@@ -76,7 +76,7 @@ export default function DonationForm() {
 
         {/* Display name */}
         <label htmlFor="displayName" className="mb-3 block text-sm font-semibold text-slate-700 dark:text-slate-300">
-          Display name
+          Display name (optional)
         </label>
         <div>
           <input
