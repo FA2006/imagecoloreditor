@@ -19,7 +19,7 @@ const footerSections = [
     links: [
       { label: 'Tutorials', to: '/tutorials' },
       { label: 'How It Works', to: '/how-it-works' },
-      { label: 'Contact & Feedback', to: '/contact' },
+      { label: 'Feedback', to: '/feedback' },
       { label: 'Privacy Policy', to: '/privacy' },
       { label: 'Terms of Service', to: '/terms' },
     ],
@@ -27,7 +27,7 @@ const footerSections = [
 ];
 
 const Footer = () => (
-  <footer className="mt-auto pt- text-slate-900 dark:text-slate-200">
+  <footer className="mt-auto  text-slate-900 dark:text-slate-200">
 
     {/* Decorative divider */}
     <div className="flex w-full items-center gap-4">
@@ -49,11 +49,11 @@ const Footer = () => (
     >
 
       {/* Brand and social links */}
-      <div className="col-start-1 row-start-1 flex flex-col items-start px-3 gap-4">
+      <div className="col-start-1 row-start-1 flex flex-col items-start lg:px-14 sm:px-14 px-1 gap-4">
 
         {/* Brand name */}
         <p className="text-lg font-semibold tracking-tight text-slate-800 dark:text-slate-200 px-2">
-          Image Color Filler
+          Image Color Editor
         </p>
 
         {/* Social links */}
@@ -132,10 +132,10 @@ const Footer = () => (
       </div>
 
       {/* Logo */}
-      <div className="col-start-2 row-start-1 flex justify-self-end lg:col-start-3 px-14">
-        <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-indigo-100 ring-1 ring-inset ring-indigo-300/60 dark:bg-indigo-950 dark:ring-indigo-800 sm:h-16 sm:w-16 lg:h-48 lg:w-48">
+      <div className="col-start-2 row-start-1 flex justify-self-end lg:col-start-3 px-11 sm:px-8 lg:px-14">
+        <span className="flex h-20 w-20 items-center justify-center rounded-xl bg-indigo-100 ring-1 ring-inset ring-indigo-300/60 dark:bg-indigo-950 dark:ring-indigo-800 sm:h-24 sm:w-24 lg:h-48 lg:w-48">
           <Wand2
-            className="h-7 w-7 text-indigo-600 dark:text-indigo-300 lg:h-24 lg:w-24"
+            className="h-10 w-10 text-indigo-600 dark:text-indigo-300 sm:h-12 sm:w-12 lg:h-24 lg:w-24"
             aria-hidden="true"
           />
         </span>

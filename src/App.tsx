@@ -341,7 +341,7 @@ const App: React.FC = () => {
             <ColorWandIcon className="h-10 w-10 text-indigo-500 dark:text-indigo-400" />
 
             <h1 className="bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text py-2 text-4xl font-bold text-transparent dark:from-indigo-400 dark:to-cyan-400 sm:text-5xl">
-              Image Color Filler
+              Image Color Editor
             </h1>
           </div>
 

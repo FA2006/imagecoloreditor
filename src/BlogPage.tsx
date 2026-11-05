@@ -118,7 +118,7 @@ const svgPlaceholders = [
           >
             <div className="mb-8 text-center">
               <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">
-                The Color Filler Blog
+                The Color Editor Blog
               </p>
 
               <h1
@@ -214,8 +214,9 @@ const svgPlaceholders = [
           </section>
         </main>
       </div>
-      
-      <Footer />
+      <div className="pt-8">
+        <Footer />
+      </div>
     </div>
 
   );

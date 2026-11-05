@@ -16,7 +16,7 @@ export default function DonationForm() {
 
         <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
           Choose an amount you'd like to contribute towards supporting
-          Image Color Filler.
+          Image Color Editor.
         </p>
       </div>
 
@@ -24,38 +24,7 @@ export default function DonationForm() {
         className="mt-6 space-y-4"
         onSubmit={(e) => e.preventDefault()}
       >
-        <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">
-          Support Free the Tools
-        </h3>
 
-        {/* Donation frequency */}
-        <div className="flex rounded-full bg-stone-200 p-1 dark:bg-slate-700">
-          <button
-            type="button"
-            onClick={() => setFrequency('once')}
-            aria-pressed={frequency === 'once'}
-            className={`flex-1 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
-              frequency === 'once'
-                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-600 dark:text-white'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
-            }`}
-          >
-            One time
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setFrequency('monthly')}
-            aria-pressed={frequency === 'monthly'}
-            className={`flex-1 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
-              frequency === 'monthly'
-                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-600 dark:text-white'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
-            }`}
-          >
-            Monthly
-          </button>
-        </div>
 
         {/* Preset donation amounts */}
         <div>
@@ -63,8 +32,8 @@ export default function DonationForm() {
             Choose amount
           </label>
 
-          <div className="grid grid-cols-4 gap-2">
-            {['5', '10', '15', '20'].map((value) => (
+          <div className="grid grid-cols-5 gap-2">
+            {['5', '10', '20'].map((value) => (
               <button
                 key={value}
                 type="button"
@@ -82,39 +51,33 @@ export default function DonationForm() {
                 ${value}
               </button>
             ))}
-          </div>
-        </div>
 
-        {/* Custom amount */}
-        <div>
-          <label
-            htmlFor="amount"
-            className="mb-3 block text-sm font-semibold text-slate-700 dark:text-slate-300"
-          >
-            Or enter an amount
-          </label>
+            {/* Custom amount */}
+            <div className="col-span-2">
+                <div className="flex items-center rounded-3xl border border-stone-300 bg-stone-100 px-4 transition-all focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 dark:border-slate-600 dark:bg-slate-800">
+                    <span className="text-sm px-2 font-semibold text-slate-600 dark:text-slate-300">$ </span>
 
-          <div className="flex items-center rounded-lg border border-stone-300 bg-stone-100 px-4 transition-all focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 dark:border-slate-600 dark:bg-slate-800">
-            <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">
-              $
-            </span>
-
-            <input
-              type="number"
-              id="amount"
-              name="amount"
-              min="1"
-              step="0.01"
-              required
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="Enter amount"
-              className="w-full no-number-arrows bg-transparent px-2 py-2.5 text-sm font-medium text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100"
-            />
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        min="1"
+                        step="0.01"
+                        required
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder="Enter amount"
+                        className="no-number-arrows w-full bg-transparent py-2.5 text-sm font-medium text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100"
+                    />
+                </div>
+            </div>
           </div>
         </div>
 
         {/* Display name */}
+        <label htmlFor="displayName" className="mb-3 block text-sm font-semibold text-slate-700 dark:text-slate-300">
+          Display name
+        </label>
         <div>
           <input
             type="text"
@@ -138,18 +101,33 @@ export default function DonationForm() {
           />
         </div>
 
-        {/* Monthly checkbox */}
-        <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300">
-          <input
-            type="checkbox"
-            checked={frequency === 'monthly'}
-            onChange={(e) =>
-              setFrequency(e.target.checked ? 'monthly' : 'once')
-            }
-            className="h-5 w-5 cursor-pointer rounded border-slate-300 accent-indigo-600 focus:ring-2 focus:ring-indigo-500"
-          />
-          Make it monthly
-        </label>
+        {/* Donation frequency */}
+        <div className="mx-auto flex w-fit justify-center rounded-full h-11 bg-stone-200 p-1 dark:bg-slate-700">
+          <button
+            type="button"
+            onClick={() => setFrequency('once')}
+            aria-pressed={frequency === 'once'}
+            className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 ${
+              frequency === 'once'
+                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-600 dark:text-white'
+                : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+            }`}>
+
+            One time
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setFrequency('monthly')}
+            aria-pressed={frequency === 'monthly'}
+            className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 ${
+              frequency === 'monthly'
+                ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-600 dark:text-white'
+                : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+            }`}>
+            Monthly
+          </button>
+        </div>
 
         {/* Donation button */}
         <button
@@ -157,7 +135,7 @@ export default function DonationForm() {
           disabled={!amount || Number(amount) <= 0}
           className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-slate-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-indigo-600 dark:hover:bg-indigo-500 dark:focus:ring-offset-slate-900"
         >
-          Tip ${Number(amount || 0).toLocaleString()}
+          Donate ${Number(amount || 0).toLocaleString()}
         </button>
       </form>
     </div>
