@@ -32,7 +32,7 @@ export default function DonationForm() {
             Choose amount
           </label>
 
-          <div className="grid grid-cols-5 gap-2">
+          <div className="grid grid-cols-4 gap-2 ">
             {['5', '10', '20'].map((value) => (
               <button
                 key={value}
@@ -53,7 +53,7 @@ export default function DonationForm() {
             ))}
 
             {/* Custom amount */}
-            <div className="col-span-2">
+            <div className="col-span-1">
                 <div className="flex items-center rounded-3xl border border-stone-300 bg-stone-100 px-4 transition-all focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 dark:border-slate-600 dark:bg-slate-800">
                     <span className="text-sm px-2 font-semibold text-slate-600 dark:text-slate-300">$ </span>
 
@@ -102,12 +102,12 @@ export default function DonationForm() {
         </div>
 
         {/* Donation frequency */}
-        <div className="mx-auto flex w-fit justify-center rounded-full h-11 bg-stone-200 p-1 dark:bg-slate-700">
+        <div className="mx-auto flex w-fit justify-center rounded-full bg-stone-200 p-1 dark:bg-slate-700">
           <button
             type="button"
             onClick={() => setFrequency('once')}
             aria-pressed={frequency === 'once'}
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 ${
+            className={`rounded-full px-5 py-1 text-sm font-semibold transition-all duration-200 ${
               frequency === 'once'
                 ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-600 dark:text-white'
                 : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
@@ -120,7 +120,7 @@ export default function DonationForm() {
             type="button"
             onClick={() => setFrequency('monthly')}
             aria-pressed={frequency === 'monthly'}
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 ${
+            className={`rounded-full px-5 py-1 text-sm font-semibold transition-all duration-200 ${
               frequency === 'monthly'
                 ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-600 dark:text-white'
                 : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
